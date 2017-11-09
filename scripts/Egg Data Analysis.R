@@ -1,0 +1,7 @@
+install.packages("ggplot2")
+egg_data <- read.csv("data/egg_data.csv")
+library(ggplot2)
+qplot(Fish.Length, data = egg_data, geom = "histogram")
+hist(egg_data$Fish.Length)
+hist(egg_data$Count)
+hist(egg_data$Area)
