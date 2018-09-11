@@ -1,6 +1,6 @@
 install.packages("ggplot2")
 install.packages("dplyr")
-#my xcode is fucked, have to reinstall, need space.
+#.git loves me again
 egg_data <- read.csv("data/egg_data.csv")
 egg_data2018 <- read.csv("data/egg_data2018.csv")
 egg_data2018b <- read.csv("data/egg_data2018b.csv")
@@ -82,28 +82,34 @@ plot(length_count8)
 length_count8A <- lm(Count ~ Fish.Length+Age, data = egg_data2018)
 summary(length_count8A)
 plot(length_count8A)
+#2
 
 length_count8B <- lm(Count ~ Fish.Length*Age, data = egg_data2018)
 summary(length_count8B)
 plot(length_count8B)
+#4
 
 length_count8bA <- lm(Count ~ Fish.Length+Age, data = egg_data2018b)
 summary(length_count8bA)
 plot(length_count8bA)
+#1
 
 length_count8bB <- lm(Count ~ Fish.Length*Age, data = egg_data2018b)
 summary(length_count8bB)
 plot(length_count8bB)
+#3
 
-ggplot(data=egg_data2018) +
+AIC(length_count8A, length_count8B, length_count8bA, length_count8bB)
+
+ggplot(data=egg_data2018b) +
   geom_point(aes(x=Fish.Length, y=Count, color = Age))
 
-ggplot(egg_data2018, aes(x=Fish.Length, y=Count, color = Age)) + geom_point() + geom_smooth(method='lm', se=FALSE)
+ggplot(egg_data2018b, aes(x=Fish.Length, y=Count, color = Age)) + geom_point() + geom_smooth(method='lm', se=FALSE)
 
-CountPlot <- ggplot(egg_data2018), 
-aes(x=Fish.Length, y=Count, color=Age, shape=Age)) + geom_point(size = 15) + 
-  geom_abline(intercept = -585.93, slope = 106.61, size = 4, color = "brown") + 
-  geom_abline(intercept = -426.57, slope = 106.61, size = 4, color = "red") +
+CountPlot18 <- ggplot(egg_data2018b), 
+aes(x=Fish.Length, y=Count, color=Age, shape=Age) + geom_point(size = 15) + 
+  geom_abline(intercept = -390.61, slope = 96.46, size = 4, color = "brown") + 
+  geom_abline(intercept = -172.67, slope = 96.46, size = 4, color = "red") +
   scale_color_manual(values = c("brown", "red")) + theme_bw()
 
 
