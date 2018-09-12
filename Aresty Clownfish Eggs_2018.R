@@ -106,11 +106,16 @@ ggplot(data=egg_data2018b) +
 
 ggplot(egg_data2018b, aes(x=Fish.Length, y=Count, color = Age)) + geom_point() + geom_smooth(method='lm', se=FALSE)
 
-CountPlot18 <- ggplot(egg_data2018b), 
+CountPlot18 <- ggplot(egg_data2018b) + 
   aes(x=Fish.Length, y=Count, color=Age, shape=Age) + geom_point(size = 15) + 
   geom_abline(intercept = -390.61, slope = 96.46, size = 4, color = "brown") + 
   geom_abline(intercept = -172.67, slope = 96.46, size = 4, color = "red") +
   scale_color_manual(values = c("brown", "red")) + theme_bw()
+
+print(CountPlot18 + Arestytheme + labs(title = 
+                                       "Length of Female Clownfish vs. Fecundity by Egg Age", 
+                                     x = "Length (cm)", y = "Egg Count", 
+                                     colour = "Egg Age", shape = "Egg Age"))
 
 
 
