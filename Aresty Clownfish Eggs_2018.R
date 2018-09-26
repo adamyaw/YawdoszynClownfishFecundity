@@ -75,9 +75,6 @@ print(CountPlot + Arestytheme + labs(title =
                                      colour = "Egg Age", shape = "Egg Age"))
 
 #2018
-length_count8 <- lm(Count ~ Fish.Length, data = egg_data2018, subset=Count !=351)
-summary(length_count8)
-plot(length_count8)
 
 length_count8A <- lm(Count ~ Fish.Length+Age, data = egg_data2018, subset=Count !=351)
 summary(length_count8A)
@@ -111,7 +108,7 @@ summary(length_count8n)
 length_count8i <- lm(Count ~ 1, data=egg_data2018b, subset=Count !=351)
 summary(length_count8i)
 
-AIC(length_count8A, length_count8B, length_count8bA, length_count8bB, length_count8n, length_count8i, length_count8, length_count8EA, length_count8EB)
+AIC(length_count8bA, length_count8bB, length_count8n, length_count8i, length_count8EA, length_count8EB)
 
 ggplot(data=egg_data2018b) +
   geom_point(aes(x=Fish.Length, y=Count, color = Age))
