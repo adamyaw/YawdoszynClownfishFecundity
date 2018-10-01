@@ -91,6 +91,10 @@ summary(length_count8bA)
 plot(length_count8bA)
 #1
 
+length_count8bAS <- lm(Count ~ Fish.Length+Age+Site, data = egg_data2018b, subset=Count !=351)
+summary(length_count8bA)
+plot(length_count8bA)
+
 length_count8EA <- lm(Count ~ Fish.Length+Eye, data = egg_data2018b, subset=Count !=351)
 summary(length_count8EA)
 plot(length_count8EB)
@@ -103,12 +107,18 @@ plot(length_count8bB)
 length_count8EB <- lm(Count ~ Fish.Length*Eye, data = egg_data2018b, subset=Count !=351)
 summary(length_count8EB)
 
+length_count8SA <- lm(Count ~ Fish.Length+Site, data = egg_data2018b, subset=Count !=351)
+summary(length_count8SA)
+
+length_count8SB <- lm(Count ~ Fish.Length*Site, data = egg_data2018b, subset=Count !=351)
+summary(length_count8SB)
+
 length_count8n <- lm(Count ~ Fish.Length, data=egg_data2018b, subset=Count !=351)
 summary(length_count8n)
 length_count8i <- lm(Count ~ 1, data=egg_data2018b, subset=Count !=351)
 summary(length_count8i)
 
-AIC(length_count8bA, length_count8bB, length_count8n, length_count8i, length_count8EA, length_count8EB)
+AIC(length_count8bA, length_count8bB, length_count8n, length_count8i, length_count8EA, length_count8EB, length_count8bAS, length_count8SA, length_count8SB)
 
 ggplot(data=egg_data2018b) +
   geom_point(aes(x=Fish.Length, y=Count, color = Age))
@@ -116,10 +126,10 @@ ggplot(data=egg_data2018b) +
 ggplot(egg_data2018b, aes(x=Fish.Length, y=Count, color = Age)) + geom_point() + geom_smooth(method='lm', se=FALSE)
 
 CountPlot18 <- ggplot(egg_data2018b) + 
-  aes(x=Fish.Length, y=Count, color=Eye, shape=Eye) + geom_point(size = 15) + 
-  geom_abline(intercept = -388.89, slope = 96.91, size = 4, color = "brown") + 
-  geom_abline(intercept = -237.38, slope = 96.91, size = 4, color = "red") +
-  scale_color_manual(values = c("red","brown")) + theme_bw()
+  aes(x=Fish.Length, y=Count, color=Age, shape=Age) + geom_point(size = 15) + 
+  geom_abline(intercept = -613.20, slope = 116.58, size = 4, color = "brown") + 
+  geom_abline(intercept = -362.29, slope = 116.58, size = 4, color = "red") +
+  scale_color_manual(values = c("brown","red")) + theme_bw()
 
 print(CountPlot18 + Arestytheme + labs(title = 
                                        "Length of Female Clownfish vs. Fecundity by Egg Age", 
