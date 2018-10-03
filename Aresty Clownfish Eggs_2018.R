@@ -1,11 +1,14 @@
 install.packages("ggplot2")
 install.packages("dplyr")
+install.packages("formattable")
 #.git loves me again
 egg_data <- read.csv("data/egg_data.csv")
 egg_data2018 <- read.csv("data/egg_data2018.csv")
 egg_data2018b <- read.csv("data/egg_data2018b.csv")
+egg_data2018t <- read.csv("data/egg_data2018b.txt")
 library(ggplot2)
 library(dplyr)
+library(formattable)
 mutate(egg_data, Density = Count/Area)
 egg_data$Age <- ifelse(egg_data$Color == "Red", c("Young"), c("Old"))
 red_eggs <- filter(egg_data, Color == "Red")
@@ -136,6 +139,10 @@ print(CountPlot18 + Arestytheme + labs(title =
                                      x = "Length (cm)", y = "Egg Count", 
                                      colour = "Egg Age", shape = "Egg Age"))
 
+fishtab = read.table("data/egg_data2018b.txt", header=T, sep='\t', stringsAsFactors = F)
+Clownfish18tab = fishtab[c(1,3,5,6,7,8,9,10)]
+widget_formattable = formattable(Clownfish18tab)
+widget_formattable
 
 
 ggplot(egg_data, aes(x=Fish.Length, y=Area, color = Color)) +
