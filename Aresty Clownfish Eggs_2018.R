@@ -1,6 +1,3 @@
-install.packages("ggplot2")
-install.packages("dplyr")
-install.packages("formattable")
 #.git loves me again
 egg_data <- read.csv("data/egg_data.csv")
 egg_data2018 <- read.csv("data/egg_data2018.csv")
@@ -73,65 +70,120 @@ Arestytheme <- theme(plot.title = element_text(family="Helvetica",
                      legend.key.size = unit(4.8, 'lines'))
 
 print(CountPlot + Arestytheme + labs(title = 
-                                       "Length of Female Clownfish vs. Fecundity by Egg Age", 
+                      "Length of Female Clownfish vs. Fecundity by Egg Age", 
                                      x = "Length (cm)", y = "Egg Count", 
                                      colour = "Egg Age", shape = "Egg Age"))
 
 #2018
+egg_data2018f <- subset(egg_data2018b[(egg_data2018b$Count!=351)&(egg_data2018b$Count!=426)&(egg_data2018b$Count!=364)&(egg_data2018b$Count!=670)&(egg_data2018b$Count!=557)&(egg_data2018b$Count!=586)&(egg_data2018b$Count!=688),])
 
-length_count8A <- lm(Count ~ Fish.Length+Age, data = egg_data2018, subset=Count !=351)
-summary(length_count8A)
-plot(length_count8A)
-#2
-
-length_count8B <- lm(Count ~ Fish.Length*Age, data = egg_data2018, subset=Count !=351)
-summary(length_count8B)
-plot(length_count8B)
-#4
-
-length_count8bA <- lm(Count ~ Fish.Length+Age, data = egg_data2018b, subset=Count !=351)
+length_count8bA <- lm(Count ~ Fish.Length+Age, data = egg_data2018f)
 summary(length_count8bA)
 plot(length_count8bA)
 #1
 
-length_count8bAS <- lm(Count ~ Fish.Length+Age+Site, data = egg_data2018b, subset=Count !=351)
-summary(length_count8bA)
-plot(length_count8bA)
+length_count8bAS <- lm(Count ~ Fish.Length+Age+Site, data = egg_data2018f)
+summary(length_count8bAS)
+plot(length_count8bAS)
 
-length_count8EA <- lm(Count ~ Fish.Length+Eye, data = egg_data2018b, subset=Count !=351)
+length_count8EA <- lm(Count ~ Fish.Length+Eye, data = egg_data2018f)
 summary(length_count8EA)
 plot(length_count8EB)
 
-length_count8bB <- lm(Count ~ Fish.Length*Age, data = egg_data2018b, subset=Count !=351)
+length_count8bB <- lm(Count ~ Fish.Length*Age, data = egg_data2018f)
 summary(length_count8bB)
 plot(length_count8bB)
 #3
 
-length_count8EB <- lm(Count ~ Fish.Length*Eye, data = egg_data2018b, subset=Count !=351)
+length_count8EB <- lm(Count ~ Fish.Length*Eye, data = egg_data2018f)
 summary(length_count8EB)
 
-length_count8SA <- lm(Count ~ Fish.Length+Site, data = egg_data2018b, subset=Count !=351)
+length_count8SA <- lm(Count ~ Fish.Length+Site, data = egg_data2018f)
 summary(length_count8SA)
 
-length_count8SB <- lm(Count ~ Fish.Length*Site, data = egg_data2018b, subset=Count !=351)
+length_count8SB <- lm(Count ~ Fish.Length*Site, data = egg_data2018f)
 summary(length_count8SB)
 
-length_count8n <- lm(Count ~ Fish.Length, data=egg_data2018b, subset=Count !=351)
+length_count8n <- lm(Count ~ Fish.Length, data = egg_data2018f)
 summary(length_count8n)
-length_count8i <- lm(Count ~ 1, data=egg_data2018b, subset=Count !=351)
+length_count8i <- lm(Count ~ 1, data = egg_data2018f)
 summary(length_count8i)
 
 AIC(length_count8bA, length_count8bB, length_count8n, length_count8i, length_count8EA, length_count8EB, length_count8bAS, length_count8SA, length_count8SB)
 
-ggplot(data=egg_data2018b) +
-  geom_point(aes(x=Fish.Length, y=Count, color = Age))
+#log, Nolan
+
+length_count8lN <- lm(log(NolCount) ~ log(Fish.Length), data = egg_data2018f)
+summary(length_count8lN)
+length_count8lNi <- lm(log(NolCount) ~ 1, data = egg_data2018f)
+summary(length_count8lNi)
+
+length_count8lNA <- lm(log(NolCount) ~ log(Fish.Length)+Age, data = egg_data2018f)
+summary(length_count8lNA)
+plot(length_count8lNA)
+
+length_count8lNAS <- lm(log(NolCount) ~ log(Fish.Length)+Age+Site, data = egg_data2018f)
+summary(length_count8lNAS)
+
+length_count8lNEA <- lm(log(NolCount) ~ log(Fish.Length)+Eye, data = egg_data2018f)
+summary(length_count8lNEA)
+plot(length_count8lNEA)
+
+length_count8lNB <- lm(log(NolCount) ~ log(Fish.Length)*Age, data = egg_data2018f)
+summary(length_count8lNB)
+
+length_count8lNEB <- lm(log(NolCount) ~ log(Fish.Length)*Eye, data = egg_data2018f)
+summary(length_count8lNEB)
+
+length_count8lNSA <- lm(log(NolCount) ~ log(Fish.Length)+Site, data = egg_data2018f)
+summary(length_count8llSA)
+
+length_count8lNSB <- lm(log(Count) ~ log(Fish.Length)*Site, data = egg_data2018f)
+summary(length_count8lNSB)
+
+AIC(length_count8lNA, length_count8lNB, length_count8lN, length_count8lNi, length_count8lNEA, length_count8lNEB, length_count8lNAS, length_count8lNSA, length_count8lNSB)
+
+
+#log, me
+length_count8ll <- lm(log(Count) ~ log(Fish.Length), data = egg_data2018f)
+summary(length_count8ll)
+length_count8lli <- lm(log(Count) ~ 1, data = egg_data2018f)
+summary(length_count8lli)
+
+length_count8llA <- lm(log(Count) ~ log(Fish.Length)+Age, data = egg_data2018f)
+summary(length_count8llA)
+plot(length_count8llA)
+
+length_count8llAS <- lm(log(Count) ~ log(Fish.Length)+Age+Site, data = egg_data2018f)
+summary(length_count8llAS)
+
+length_count8llEA <- lm(log(Count) ~ log(Fish.Length)+Eye, data = egg_data2018f)
+summary(length_count8llEA)
+plot(length_count8llEA)
+
+length_count8llB <- lm(log(Count) ~ log(Fish.Length)*Age, data = egg_data2018f)
+summary(length_count8llB)
+
+length_count8llEB <- lm(log(Count) ~ log(Fish.Length)*Eye, data = egg_data2018f)
+summary(length_count8llEB)
+
+length_count8llSA <- lm(log(Count) ~ log(Fish.Length)+Site, data = egg_data2018f)
+summary(length_count8llSA)
+
+length_count8llSB <- lm(log(Count) ~ log(Fish.Length)*Site, data = egg_data2018f)
+summary(length_count8llSB)
+
+AIC(length_count8llA, length_count8llB, length_count8ll, length_count8lli, length_count8llEA, length_count8llEB, length_count8llAS, length_count8llSA, length_count8llSB)
+
+ggplot(data=egg_data2018f) +
+  geom_point(aes(x=Fish.Length, y=Count, color = Eye))
 
 ggplot(egg_data2018b, aes(x=Fish.Length, y=Count, color = Age)) + geom_point() + geom_smooth(method='lm', se=FALSE)
 
-CountPlot18 <- ggplot(egg_data2018b) + 
-  aes(x=Fish.Length, y=Count, color=Age, shape=Age) + geom_point(size = 15) + 
+CountPlot18 <- ggplot(egg_data2018f,
+  aes(x=log(Fish.Length), y=log(Count), color=Age, shape=Age))+ geom_point(size = 15) + 
   geom_abline(intercept = -613.20, slope = 116.58, size = 4, color = "brown") + 
-  geom_abline(intercept = -362.29, slope = 116.58, size = 4, color = "red") +
+  geom_abline(intercept = -362.29, slope = 116.58, size = 4, color = "red") + 
   scale_color_manual(values = c("brown","red")) + theme_bw()
 
 print(CountPlot18 + Arestytheme + labs(title = 
@@ -143,6 +195,7 @@ fishtab = read.table("data/egg_data2018b.txt", header=T, sep='\t', stringsAsFact
 Clownfish18tab = fishtab[c(1,3,5,6,7,8,9,10)]
 widget_formattable = formattable(Clownfish18tab)
 widget_formattable
+
 
 
 ggplot(egg_data, aes(x=Fish.Length, y=Area, color = Color)) +
