@@ -111,38 +111,6 @@ summary(length_count8i)
 
 AIC(length_count8bA, length_count8bB, length_count8n, length_count8i, length_count8EA, length_count8EB, length_count8bAS, length_count8SA, length_count8SB)
 
-#log, Nolan
-
-length_count8lN <- lm(log(NolCount) ~ log(Fish.Length), data = egg_data2018f)
-summary(length_count8lN)
-length_count8lNi <- lm(log(NolCount) ~ 1, data = egg_data2018f)
-summary(length_count8lNi)
-
-length_count8lNA <- lm(log(NolCount) ~ log(Fish.Length)+Age, data = egg_data2018f)
-summary(length_count8lNA)
-plot(length_count8lNA)
-
-length_count8lNAS <- lm(log(NolCount) ~ log(Fish.Length)+Age+Site, data = egg_data2018f)
-summary(length_count8lNAS)
-
-length_count8lNEA <- lm(log(NolCount) ~ log(Fish.Length)+Eye, data = egg_data2018f)
-summary(length_count8lNEA)
-plot(length_count8lNEA)
-
-length_count8lNB <- lm(log(NolCount) ~ log(Fish.Length)*Age, data = egg_data2018f)
-summary(length_count8lNB)
-
-length_count8lNEB <- lm(log(NolCount) ~ log(Fish.Length)*Eye, data = egg_data2018f)
-summary(length_count8lNEB)
-
-length_count8lNSA <- lm(log(NolCount) ~ log(Fish.Length)+Site, data = egg_data2018f)
-summary(length_count8llSA)
-
-length_count8lNSB <- lm(log(Count) ~ log(Fish.Length)*Site, data = egg_data2018f)
-summary(length_count8lNSB)
-
-AIC(length_count8lNA, length_count8lNB, length_count8lN, length_count8lNi, length_count8lNEA, length_count8lNEB, length_count8lNAS, length_count8lNSA, length_count8lNSB)
-
 
 #log, me
 length_count8ll <- lm(log(Count) ~ log(Fish.Length), data = egg_data2018f)
@@ -174,6 +142,74 @@ length_count8llSB <- lm(log(Count) ~ log(Fish.Length)*Site, data = egg_data2018f
 summary(length_count8llSB)
 
 AIC(length_count8llA, length_count8llB, length_count8ll, length_count8lli, length_count8llEA, length_count8llEB, length_count8llAS, length_count8llSA, length_count8llSB)
+
+#log Count, Nolan
+
+length_count8lN <- lm(log(NolCount) ~ Fish.Length, data = egg_data2018f)
+summary(length_count8lN)
+length_count8lNi <- lm(log(NolCount) ~ 1, data = egg_data2018f)
+summary(length_count8lNi)
+
+length_count8lNA <- lm(log(NolCount) ~ Fish.Length+Age, data = egg_data2018f)
+summary(length_count8lNA)
+plot(length_count8lNA)
+
+length_count8lNAS <- lm(log(NolCount) ~ Fish.Length+Age+Site, data = egg_data2018f)
+summary(length_count8lNAS)
+
+length_count8lNEA <- lm(log(NolCount) ~ Fish.Length+Eye, data = egg_data2018f)
+summary(length_count8lNEA)
+plot(length_count8lNEA)
+
+length_count8lNB <- lm(log(NolCount) ~ Fish.Length*Age, data = egg_data2018f)
+summary(length_count8lNB)
+
+length_count8lNEB <- lm(log(NolCount) ~ Fish.Length*Eye, data = egg_data2018f)
+summary(length_count8lNEB)
+
+length_count8lNSA <- lm(log(NolCount) ~ Fish.Length+Site, data = egg_data2018f)
+summary(length_count8llSA)
+
+length_count8lNSB <- lm(log(NolCount) ~ Fish.Length*Site, data = egg_data2018f)
+summary(length_count8lNSB)
+
+AIC(length_count8lNA, length_count8lNB, length_count8lN, length_count8lNi, length_count8lNEA, length_count8lNEB, length_count8lNAS, length_count8lNSA, length_count8lNSB)
+
+
+#log transforming only count
+
+length_count8lC <- lm(log(Count) ~ Fish.Length, data = egg_data2018f)
+summary(length_count8lC)
+length_count8lCi <- lm(log(Count) ~ 1, data = egg_data2018f)
+summary(length_count8lCi)
+
+length_count8lCA <- lm(log(Count) ~ Fish.Length+Age, data = egg_data2018f)
+summary(length_count8lCA)
+plot(length_count8lCA)
+
+length_count8lCAS <- lm(log(Count) ~ Fish.Length+Age+Site, data = egg_data2018f)
+summary(length_count8lCAS)
+
+length_count8lCEA <- lm(log(Count) ~ Fish.Length+Eye, data = egg_data2018f)
+summary(length_count8lCEA)
+plot(length_count8lCEA)
+
+length_count8lCB <- lm(log(Count) ~ Fish.Length*Age, data = egg_data2018f)
+summary(length_count8lCB)
+
+length_count8lCEB <- lm(log(Count) ~ Fish.Length*Eye, data = egg_data2018f)
+summary(length_count8lCEB)
+
+length_count8lCSA <- lm(log(Count) ~ Fish.Length+Site, data = egg_data2018f)
+summary(length_count8lCSA)
+
+length_count8lCSB <- lm(log(Count) ~ Fish.Length*Site, data = egg_data2018f)
+summary(length_count8lCSB)
+
+AIC(length_count8lCA, length_count8lCB, length_count8lC, length_count8lCi, length_count8lCEA, length_count8lCEB, length_count8lCAS, length_count8lCSA, length_count8lCSB)
+
+length_count8lLEA <- lm(Count ~ log(Fish.Length)+Eye, data = egg_data2018f)
+summary(length_count8lLEA)
 
 ggplot(data=egg_data2018f) +
   geom_point(aes(x=Fish.Length, y=Count, color = Eye))
