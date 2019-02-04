@@ -75,7 +75,7 @@ print(CountPlot + Arestytheme + labs(title =
                                      colour = "Egg Age", shape = "Egg Age"))
 
 #2018
-egg_data2018f <- subset(egg_data2018b[(egg_data2018b$Count!=351)&(egg_data2018b$Count!=426)&(egg_data2018b$Count!=364)&(egg_data2018b$Count!=670)&(egg_data2018b$Count!=557)&(egg_data2018b$Count!=586)&(egg_data2018b$Count!=688),])
+egg_data2018f <- subset(egg_data2018b[(egg_data2018b$Count!=351)&(egg_data2018b$Count!=426)&(egg_data2018b$Count!=364)&(egg_data2018b$Count!=670)&(egg_data2018b$Count!=557)&(egg_data2018b$Count!=688),])
 
 length_count8bA <- lm(Count ~ Fish.Length+Age, data = egg_data2018f)
 summary(length_count8bA)
@@ -142,6 +142,39 @@ length_count8llSB <- lm(log(Count) ~ log(Fish.Length)*Site, data = egg_data2018f
 summary(length_count8llSB)
 
 AIC(length_count8llA, length_count8llB, length_count8ll, length_count8lli, length_count8llEA, length_count8llEB, length_count8llAS, length_count8llSA, length_count8llSB)
+
+#log Both, Nolan
+
+length_count8llN <- lm(log(NolCount) ~ log(Fish.Length), data = egg_data2018f)
+summary(length_count8llN)
+length_count8llNi <- lm(log(NolCount) ~ 1, data = egg_data2018f)
+summary(length_count8llNi)
+
+length_count8llNA <- lm(log(NolCount) ~ log(Fish.Length)+Age, data = egg_data2018f)
+summary(length_count8llNA)
+plot(length_count8llNA)
+
+length_count8llNAS <- lm(log(NolCount) ~ log(Fish.Length)+Age+Site, data = egg_data2018f)
+summary(length_count8llNAS)
+
+length_count8llNEA <- lm(log(NolCount) ~ log(Fish.Length)+Eye, data = egg_data2018f)
+summary(length_count8llNEA)
+plot(length_count8llNEA)
+
+length_count8llNB <- lm(log(NolCount) ~ log(Fish.Length)*Age, data = egg_data2018f)
+summary(length_count8llNB)
+
+length_count8llNEB <- lm(log(NolCount) ~ log(Fish.Length)*Eye, data = egg_data2018f)
+summary(length_count8llNEB)
+
+length_count8llNSA <- lm(log(NolCount) ~ log(Fish.Length)+Site, data = egg_data2018f)
+summary(length_count8llNSA)
+
+length_count8llNSB <- lm(log(NolCount) ~ log(Fish.Length)*Site, data = egg_data2018f)
+summary(length_count8llNSB)
+
+AIC(length_count8llNA, length_count8llNB, length_count8llN, length_count8llNi, length_count8llNEA, length_count8llNEB, length_count8llNAS, length_count8llNSA, length_count8llNSB)
+
 
 #log Count, Nolan
 
