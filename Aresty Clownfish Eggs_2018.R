@@ -250,16 +250,27 @@ ggplot(data=egg_data2018f) +
 
 ggplot(egg_data2018b, aes(x=Fish.Length, y=Count, color = Age)) + geom_point() + geom_smooth(method='lm', se=FALSE)
 
+#fully log transformed
 CountPlot18 <- ggplot(egg_data2018f,
-  aes(x=log(Fish.Length), y=log(Count), color=Age, shape=Age))+ geom_point(size = 15) + 
-  geom_abline(intercept = -613.20, slope = 116.58, size = 4, color = "brown") + 
-  geom_abline(intercept = -362.29, slope = 116.58, size = 4, color = "red") + 
-  scale_color_manual(values = c("brown","red")) + theme_bw()
+  aes(x=log(Fish.Length), y=log(Count), color=Eye, shape=Eye))+ geom_point(size = 15) + 
+  geom_abline(intercept = .5655, slope = 2.3881, size = 4, color = "brown") + 
+  geom_abline(intercept = 1.1738, slope = 2.3881, size = 4, color = "red") + 
+  scale_color_manual(values = c("red","brown")) + theme_bw()
+
+#log-scale axes (update, I cannot figure out the way to do this how I want)
+CountPlotlog18 <- ggplot(egg_data2018f,
+                      aes(x=log(Fish.Length), y=log(Count), color=Eye, shape=Eye))+ geom_point(size = 15) + 
+  geom_abline(intercept = -761.74, slope = 127.99, size = 4, color = "brown") + 
+  geom_abline(intercept = -457.81, slope = 127.99, size = 4, color = "red") + 
+  scale_color_manual(values = c("red","brown")) + theme_bw() + scale_x_log10() + scale_y_log10()
+
+CountPlotlog18 + annotation_logticks()
+#that did not work
 
 print(CountPlot18 + Arestytheme + labs(title = 
-                                       "Length of Female Clownfish vs. Fecundity by Egg Age", 
+                                       "Length of Female Clownfish vs. Fecundity by Egg Eyeing", 
                                      x = "Length (cm)", y = "Egg Count", 
-                                     colour = "Egg Age", shape = "Egg Age"))
+                                     colour = "Egg Eyes", shape = "Egg Eyes"))
 
 fishtab = read.table("data/egg_data2018b.txt", header=T, sep='\t', stringsAsFactors = F)
 Clownfish18tab = fishtab[c(1,3,5,6,7,8,9,10)]
