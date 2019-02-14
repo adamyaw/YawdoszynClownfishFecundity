@@ -267,9 +267,10 @@ CountPlotlog18 <- ggplot(egg_data2018f,
 CountPlotlog18 + annotation_logticks()
 #that did not work
 
+#how to get subscript?
 print(CountPlot18 + Arestytheme + labs(title = 
                                        "Length of Female Clownfish vs. Fecundity by Egg Eyeing", 
-                                     x = "Length (cm)", y = "Egg Count", 
+                                     x = "logLength (cm)", y = "logEgg Count", 
                                      colour = "Egg Eyes", shape = "Egg Eyes"))
 
 fishtab = read.table("data/egg_data2018b.txt", header=T, sep='\t', stringsAsFactors = F)
