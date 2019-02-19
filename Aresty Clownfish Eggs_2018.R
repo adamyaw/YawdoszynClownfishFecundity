@@ -7,6 +7,7 @@ egg_data2018t <- read.csv("data/egg_data2018b.txt")
 library(ggplot2)
 library(dplyr)
 library(formattable)
+################# 2017 ################
 mutate(egg_data, Density = Count/Area)
 egg_data$Age <- ifelse(egg_data$Color == "Red", c("Young"), c("Old"))
 red_eggs <- filter(egg_data, Color == "Red")
@@ -75,7 +76,7 @@ print(CountPlot + Arestytheme + labs(title =
                                      x = "Length (cm)", y = "Egg Count", 
                                      colour = "Egg Age", shape = "Egg Age"))
 
-#2018
+################################ 2018 ####################
 egg_data2018f <- subset(egg_data2018b[(egg_data2018b$Count!=351)&(egg_data2018b$Count!=426)&(egg_data2018b$Count!=364)&(egg_data2018b$Count!=670)&(egg_data2018b$Count!=557)&(egg_data2018b$Count!=688),])
 
 length_count8bA <- lm(Count ~ Fish.Length+Age, data = egg_data2018f)
@@ -113,7 +114,7 @@ summary(length_count8i)
 AIC(length_count8bA, length_count8bB, length_count8n, length_count8i, length_count8EA, length_count8EB, length_count8bAS, length_count8SA, length_count8SB)
 
 
-#log, me
+############### log, me #########
 length_count8ll <- lm(log(Count) ~ log(Fish.Length), data = egg_data2018f)
 summary(length_count8ll)
 length_count8lli <- lm(log(Count) ~ 1, data = egg_data2018f)
@@ -144,7 +145,7 @@ summary(length_count8llSB)
 
 AIC(length_count8llA, length_count8llB, length_count8ll, length_count8lli, length_count8llEA, length_count8llEB, length_count8llAS, length_count8llSA, length_count8llSB)
 
-#log Both, Nolan
+############### log Both, Nolan ################
 
 length_count8llN <- lm(log(NolCount) ~ log(Fish.Length), data = egg_data2018f)
 summary(length_count8llN)
@@ -177,7 +178,7 @@ summary(length_count8llNSB)
 AIC(length_count8llNA, length_count8llNB, length_count8llN, length_count8llNi, length_count8llNEA, length_count8llNEB, length_count8llNAS, length_count8llNSA, length_count8llNSB)
 
 
-#log Count, Nolan
+###################### log Count, Nolan ############
 
 length_count8lN <- lm(log(NolCount) ~ Fish.Length, data = egg_data2018f)
 summary(length_count8lN)
@@ -210,7 +211,7 @@ summary(length_count8lNSB)
 AIC(length_count8lNA, length_count8lNB, length_count8lN, length_count8lNi, length_count8lNEA, length_count8lNEB, length_count8lNAS, length_count8lNSA, length_count8lNSB)
 
 
-#log transforming only count
+#################### log transforming only count #########
 
 length_count8lC <- lm(log(Count) ~ Fish.Length, data = egg_data2018f)
 summary(length_count8lC)
@@ -244,6 +245,8 @@ AIC(length_count8lCA, length_count8lCB, length_count8lC, length_count8lCi, lengt
 
 length_count8lLEA <- lm(Count ~ log(Fish.Length)+Eye, data = egg_data2018f)
 summary(length_count8lLEA)
+
+################ plotting #############
 
 ggplot(data=egg_data2018f) +
   geom_point(aes(x=Fish.Length, y=Count, color = Eye))
@@ -317,6 +320,7 @@ area_density2 <- lm(Area~Density+Color, data = egg_data)
 summary(area_density2)
 plot(area_density2)
 
+sqrt(var(egg_data2018f$Count))
 #ideas: exclude outliers and look for relationship between fish 
 #length and density. 
 #Also look for relationship between length+area to compare
