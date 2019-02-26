@@ -177,6 +177,7 @@ summary(length_count8llNSB)
 
 AIC(length_count8llNA, length_count8llNB, length_count8llN, length_count8llNi, length_count8llNEA, length_count8llNEB, length_count8llNAS, length_count8llNSA, length_count8llNSB)
 
+save(length_count8llEA, file="loglogFecunditySizeModel.RData")
 
 ###################### log Count, Nolan ############
 
@@ -291,6 +292,8 @@ plot(length_area)
 
 ggplot(egg_data, aes(x=Area, y=Count, color = Color)) +
   geom_point()
+
+############ misc #############
 
 Density <- (egg_data$Count / egg_data$Area)
 summary(Density)
